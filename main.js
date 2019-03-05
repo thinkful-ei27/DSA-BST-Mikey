@@ -38,10 +38,8 @@ function findRight(tree, newHeight) {
 }
 
 function findHeight(tree) {
-
   const leftHeight = findLeft(tree.left, 1);
   const rightHeight = findRight(tree.right, 1);
-
   if (leftHeight > rightHeight) {
     return leftHeight;
   }
@@ -66,6 +64,55 @@ function treeChecker(tree) {
   return true;
 }
 
+/*
+     if height right is less than two need some
+    edge cases on left of tree
+     if height is greater than two
+    go down right side of tree, 
+   when  tree.right=null
+    tree.parent.parent is third larges;
+ */
+
+
+const _rightSideChecker = (tree, familyArray) => {
+  if (tree.right) {
+    familyArray[0] = tree.parent;
+    familyArray[1] = tree;
+    familyArray[2] = tree.left;
+    familyArray[3] = tree.right;
+    return _rightSideChecker(tree.right, familyArray, tree.parent);
+  } else {
+    return familyArray;
+  }
+};
+
+/* edge case disasters!!!! */
+
+function thirdLargestValue(myTree) {
+  const starterTree = myTree.right.right;
+  if (!myTree.right && !myTree.left.right) {
+    return myTree.left.left;
+  }
+  else {
+    const myFamilyArray = [
+      myTree,
+      myTree.right,
+      myTree.right.left,
+      starterTree
+    ];
+    const [grandParent, parent, cousin] = _rightSideChecker(starterTree, myFamilyArray);
+    if (!cousin) {
+      return grandParent.key;
+    }
+    else if (cousin.right === null) {
+      return cousin.key;
+    }
+    else {
+      const finalFamilyArray = _rightSideChecker(cousin, [parent, cousin, cousin.left, cousin.right]);
+      return finalFamilyArray[3].key;
+    }
+  }
+}
 
 
 
@@ -85,7 +132,21 @@ function main() {
   BST.insert(7);
   // console.log(JSON.stringify(BST, null, 2));
   // console.log(findHeight(BST));
-  console.log(treeChecker(BST));
+  // console.log(treeChecker(BST));
+  // console.log(thirdLargestValue(BST));
+  const BST2 = new BinarySearchTree;
+  BST2.insert(50);
+  BST2.insert(60);
+  BST2.insert(70);
+  BST2.insert(80);
+  BST2.insert(65);
+  BST2.insert(64);
+  BST2.insert(66);
+  BST2.insert(68);
+  BST2.insert(55);
+  console.log(thirdLargestValue(BST2));
+
+
 
 }
 main();
