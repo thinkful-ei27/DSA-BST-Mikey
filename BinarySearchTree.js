@@ -8,7 +8,8 @@ class BinarySearchTree {
     this.left = null;
     this.right = null;
   }
-
+  
+  
   insert(key, value) {
     if (this.key === null) {
       this.key = key;
@@ -16,7 +17,7 @@ class BinarySearchTree {
     }
     else if (key < this.key) {
       if (this.left === null) {
-        this.left = new BinarySearchTree(key, value, this);
+        this.left = new BinarySearchTree(key, value, this.key);
       }
       else {
         this.left.insert(key, value);
@@ -24,7 +25,7 @@ class BinarySearchTree {
     }
     else {
       if (this.right === null) {
-        this.right = new BinarySearchTree(key, value, this);
+        this.right = new BinarySearchTree(key, value, this.key);
       }
       else {
         this.right.insert(key, value);
