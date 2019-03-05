@@ -1,10 +1,5 @@
 const BinarySearchTree = require('./BinarySearchTree');
 
-
-
-
-
-
 /*================= height of BST +++++++++++====*/
 function findLeft(tree, newHeight = 0) {
   newHeight++;
@@ -37,11 +32,9 @@ function findHeight(tree) {
   else return rightHeight;
 }
 
-
 //  go left and right
 //  before hitting null, check tree.right > tree
 // tree.left > tree
-
 
 function treeChecker(tree) {
   if (tree.right) {
@@ -63,7 +56,6 @@ function treeChecker(tree) {
    when  tree.right=null
     tree.parent.parent is third larges;
  */
-
 
 const _rightSideChecker = (tree, familyArray) => {
   if (tree.right) {
@@ -108,16 +100,11 @@ function thirdLargestValue(myTree) {
 
 // if tree. left && tree.right
 //  return bbst(tree.right), bbst(tree.left)
-
-
 //  if tree.right is null,
 //        if (tree.left.left or tree.left.right) return false
 // if  tree.left is null
 //      if tree.right.right or tree.right .left return false
-
-
 //  return true
-
 
 function balancedBst(tree) {
   if (tree.left && tree.right) {
@@ -148,8 +135,6 @@ function createBst(list) {
   return BST;
 }
 
-
-
 function main() {
   const BST = new BinarySearchTree;
   BST.insert(3);
@@ -176,9 +161,7 @@ function main() {
   BST2.insert(55);
   // console.log(thirdLargestValue(BST2));
   const newTree = createBst(dataList);
-
   console.log(balancedBst(newTree));
 }
-
 
 main();
